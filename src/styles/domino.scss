@@ -1,0 +1,43 @@
+
+$domino-width: 300px;
+$domino-height: 150px;
+$bg: #3c3c3c;
+
+.domino {
+  display: flex;
+  align-items: stretch;
+  width: $domino-width;
+  height: $domino-height;
+  border: 2px solid $bg;
+  overflow: hidden;
+  border-radius: 5px;
+  
+  &__divider {
+    width: 2px;
+    margin: 0 2%;
+    background: $bg;
+  }
+  
+  &__face {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  &__face-row {
+    display: flex;
+    flex: 1;
+  }
+  
+  &__face-cell {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  &__dot {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background: $bg;
+  }
+}

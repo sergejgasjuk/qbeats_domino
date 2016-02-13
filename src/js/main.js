@@ -1,4 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import DominoApp from "./components/DominoApp";
 
-ReactDOM.render(<h1>init</h1>, document.getElementById("app"));
+ReactDOM.render(<DominoApp/>, document.getElementById("container"));
