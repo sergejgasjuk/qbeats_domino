@@ -1,4 +1,5 @@
 import React from "react";
+import { Motion, spring } from "react-motion";
 import classNames from "classnames/bind";
 
 import DP from "../constants/dominoPatterns";
@@ -13,11 +14,12 @@ class DominoApp extends React.Component {
     
     this.state = {};
     this.state.patterns = [DP[utils.getRandomInt()], DP[utils.getRandomInt()]];
+    this.state.rotationVal = 0;
     
     this.buttons = [
       {
         text: "rotate left",
-        action: null
+        action: this.handleRotation.bind(this, -90)
       },
       {
         text: "render random",
@@ -25,7 +27,7 @@ class DominoApp extends React.Component {
       },
       {
         text: "rotate right",
-        action: null
+        action: this.handleRotation.bind(this, 90)
       }
     ];
   }
@@ -35,7 +37,16 @@ class DominoApp extends React.Component {
     this.setState({ patterns });
   }
   
+  handleRotation(val = 90) {
+    let {rotationVal} = this.state;
+    rotationVal = rotationVal + Number(val);
+    
+    this.setState({ rotationVal });
+  }
+  
   render() {
+    let {rotationVal} = this.state;
+    
     return (
       <div className={`domino-app`}>
         <div className={`domino-app__actions`}>
@@ -44,9 +55,18 @@ class DominoApp extends React.Component {
           )}
         </div>
         <div className={`domino-app__body`}>
-          <div className={`domino-app__domino`}>
-            <Domino patterns={this.state.patterns} />
-          </div>
+          <Motion style={{deg: spring(rotationVal)}}>
+            {({deg}) => {
+              let styleObj = {
+                transform: `rotate(${deg}deg)`
+              };
+              return (
+                <div className={`domino-app__domino`} style={styleObj}>
+                  <Domino patterns={this.state.patterns} />
+                </div>
+              )
+            }}
+          </Motion>
         </div>
       </div>
     )
@@ -54,3 +74,5 @@ class DominoApp extends React.Component {
 }
 
 export default DominoApp;
+
+
