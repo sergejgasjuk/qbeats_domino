@@ -7,7 +7,7 @@ class Domino extends React.Component {
   }
   
   render() {
-    let pattern = this.props.pattern;
+    let patterns = this.props.patterns;
 
     let genDots = (arr) => {
       return arr.map((row, i) => 
@@ -26,11 +26,11 @@ class Domino extends React.Component {
     return (
       <div className={`domino`}>
         <div className={`domino__face`}>
-          {genDots(pattern[0])}
+          {genDots(patterns[0])}
         </div>
         <div className={`domino__divider`}></div>
         <div className={`domino__face`}>
-          {genDots(pattern[1])}
+          {genDots(patterns[1])}
         </div>
       </div>
     )

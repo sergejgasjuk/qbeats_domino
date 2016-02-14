@@ -12,26 +12,27 @@ class DominoApp extends React.Component {
     super(props);
     
     this.state = {};
-    this.state.pattern = [DP[utils.getRandomInt()], DP[utils.getRandomInt()]];
+    this.state.patterns = [DP[utils.getRandomInt()], DP[utils.getRandomInt()]];
     
     this.buttons = [
       {
         text: "rotate left",
-        action: this.hand.bind(this)
+        action: null
       },
       {
         text: "render random",
-        action: this.hand.bind(this)
+        action: this.genRandomDomino.bind(this)
       },
       {
         text: "rotate right",
-        action: this.hand.bind(this)
+        action: null
       }
     ];
   }
   
-  hand() {
-    alert("ff");
+  genRandomDomino() {  
+    let patterns = [DP[utils.getRandomInt()], DP[utils.getRandomInt()]];
+    this.setState({ patterns });
   }
   
   render() {
@@ -42,8 +43,10 @@ class DominoApp extends React.Component {
             <Button text={btn.text} action={btn.action} key={i}/>
           )}
         </div>
-        <div className={`domino-app__domino`}>
-          <Domino pattern={this.state.pattern} />
+        <div className={`domino-app__body`}>
+          <div className={`domino-app__domino`}>
+            <Domino patterns={this.state.patterns} />
+          </div>
         </div>
       </div>
     )
