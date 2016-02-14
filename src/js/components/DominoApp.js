@@ -1,6 +1,5 @@
 import React from "react";
 import { Motion, spring } from "react-motion";
-import classNames from "classnames/bind";
 
 import DP from "../constants/dominoPatterns";
 import utils from "../utils/helpers";
@@ -41,6 +40,10 @@ class DominoApp extends React.Component {
     let {rotationVal} = this.state;
     rotationVal = rotationVal + Number(val);
     
+    if (Math.abs(rotationVal) === 360) {
+      rotationVal = 0;
+    }
+    
     this.setState({ rotationVal });
   }
   
@@ -55,11 +58,13 @@ class DominoApp extends React.Component {
           )}
         </div>
         <div className={`domino-app__body`}>
-          <Motion style={{deg: spring(rotationVal)}}>
+          <Motion style={{deg: spring(rotationVal, {stiffness: 170, damping: 12})}}>
             {({deg}) => {
+              
               let styleObj = {
                 transform: `rotate(${deg}deg)`
               };
+              
               return (
                 <div className={`domino-app__domino`} style={styleObj}>
                   <Domino patterns={this.state.patterns} />

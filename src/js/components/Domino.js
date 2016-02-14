@@ -1,14 +1,12 @@
 import React from "react";
-import classNames from "classnames/bind";
 
 class Domino extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+ 
   render() {
     let patterns = this.props.patterns;
-
     let genDots = (arr) => {
       return arr.map((row, i) => 
         <div className={`domino__face-row`} key={i}>
